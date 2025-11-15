@@ -44,51 +44,53 @@ class Bachelor:
         else:
             print(f"Бакалавр {self.surname} уже в академическом отпуске.")
 
+class Menu:
+    def __init__(self, bachelors):
+        self.bachelors = bachelors
 
-def menu(bachelors):
-    while True:
-        if not bachelors:
-            print("Нет бакалавров. Программа завершена.")
-            break
-        
-        print("\nМеню:")
-        print("1. Просмотреть данные")
-        print("2. Установить фамилию")
-        print("3. Установить специальность")
-        print("4. Установить курс")
-        print("5. Повысить курс")
-        print("6. Академический отпуск")
-        print("7. Выход")
+    def show(self):
+        while True:
+            if not self.bachelors:
+                print("Нет бакалавров. Программа завершена.")
+                break
+            print("\nМеню:")
+            print("1. Просмотреть данные")
+            print("2. Установить фамилию")
+            print("3. Установить специальность")
+            print("4. Установить курс")
+            print("5. Повысить курс")
+            print("6. Академический отпуск")
+            print("7. Выход")
 
-        choice = input("Выберите действие: ")
-        
-        if choice == "7":
-            print("Работа завершена.")
-            break
-        
-        idx = int(input(f"Выберите бакалавра (от 1 до {len(bachelors)}): ")) - 1
-        if idx not in range(len(bachelors)):
-            print("Ошибка выбора!")
-            continue
+            choice = input("Выберите действие: ")
+            if choice == "7":
+                print("Работа завершена.")
+                break
+            idx = int(input(f"Выберите бакалавра (от 1 до {len(self.bachelors)}): ")) - 1
+            if idx not in range(len(self.bachelors)):
+                print("Ошибка выбора!")
+                continue
 
-        if choice == "1":
-            bachelors[idx].info()
-        elif choice == "2":
-            surname = input("Введите фамилию: ")
-            bachelors[idx].set_surname(surname)
-        elif choice == "3":
-            specialty = input("Введите специальность: ")
-            bachelors[idx].set_specialty(specialty)
-        elif choice == "4":
-            course = int(input("Введите курс (1-4): "))
-            bachelors[idx].set_course(course)
-        elif choice == "5":
-            bachelors[idx].change_course()
-        elif choice == "6":
-            bachelors[idx].take_academic_leave()
-        else:
-            print("Неизвестная команда.")
+            bachelor = self.bachelors[idx]
+            if choice == "1":
+                bachelor.info()
+            elif choice == "2":
+                surname = input("Введите фамилию: ")
+                bachelor.set_surname(surname)
+            elif choice == "3":
+                specialty = input("Введите специальность: ")
+                bachelor.set_specialty(specialty)
+            elif choice == "4":
+                course = int(input("Введите курс (1-4): "))
+                bachelor.set_course(course)
+            elif choice == "5":
+                bachelor.change_course()
+            elif choice == "6":
+                bachelor.take_academic_leave()
+            else:
+                print("Неизвестная команда.")
 
+# Основная функция
 
 def main():
     print("Создание первого бакалавра:")
@@ -100,7 +102,8 @@ def main():
     bachelor2.info()
 
     bachelors = [bachelor1, bachelor2]
-    menu(bachelors)
+    menu = Menu(bachelors)
+    menu.show()
 
 if __name__ == "__main__":
     main()
