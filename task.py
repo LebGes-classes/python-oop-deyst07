@@ -28,7 +28,9 @@ class Bachelor:
 
     def info(self):
         status = "в академическом отпуске" if self.on_leave else "обучается"
-        print(f"Фамилия: {self.surname}, Специальность: {self.specialty}, Курс: {self.course}, Статус: {status}")
+        print(
+            f"Фамилия: {self.surname}, Специальность: {self.specialty}, Курс: {self.course}, Статус: {status}"
+        )
 
     def change_course(self):
         if self.course < 4:
@@ -36,13 +38,14 @@ class Bachelor:
             print("Повышен курс!")
         else:
             print("Максимальный курс — 4.")
-    
+
     def take_academic_leave(self):
         if not self.on_leave:
             self.on_leave = True
             print(f"Бакалавр {self.surname} переведён в академический отпуск.")
         else:
             print(f"Бакалавр {self.surname} уже в академическом отпуске.")
+
 
 class Menu:
     def __init__(self, bachelors):
@@ -66,7 +69,9 @@ class Menu:
             if choice == "7":
                 print("Работа завершена.")
                 break
-            idx = int(input(f"Выберите бакалавра (от 1 до {len(self.bachelors)}): ")) - 1
+            idx = (
+                int(input(f"Выберите бакалавра (от 1 до {len(self.bachelors)}): ")) - 1
+            )
             if idx not in range(len(self.bachelors)):
                 print("Ошибка выбора!")
                 continue
@@ -90,7 +95,9 @@ class Menu:
             else:
                 print("Неизвестная команда.")
 
+
 # Основная функция
+
 
 def main():
     print("Создание первого бакалавра:")
@@ -104,6 +111,7 @@ def main():
     bachelors = [bachelor1, bachelor2]
     menu = Menu(bachelors)
     menu.show()
+
 
 if __name__ == "__main__":
     main()
